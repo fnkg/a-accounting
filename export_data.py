@@ -76,15 +76,15 @@ def export_to_xlsx(dataframes, output_dir):
             df.to_excel(writer, sheet_name=name, index=False)
         print(f'Data exported to {output_file}')
 
-def process_database(db_number, sql_scripts_dir, archive_dir):
+def process_database(db_number, sql_scripts_dir, temp_dir):
     connection_details = get_connection_details(db_number)
     tunnel, conn = create_db_connection(connection_details)
     
     try:
         sql_scripts = [os.path.join(sql_scripts_dir, f) for f in os.listdir(sql_scripts_dir) if f.endswith('.sql')]
         results = execute_sql_scripts(sql_scripts, conn)
-        export_to_json(results, archive_dir)
-        export_to_xlsx(results, archive_dir)
+        export_to_json(results, temp_dir)
+        export_to_xlsx(results, temp_dir)
     except Exception as e:
         print(f"Error processing database: {e}")
     finally:
@@ -92,16 +92,16 @@ def process_database(db_number, sql_scripts_dir, archive_dir):
 
 def main():
     if len(sys.argv) != 2:
-        print("Usage: python export_data.py <archive_directory>")
+        print("Usage: python export_data.py <temp_directory>")
         return
     
-    archive_dir = sys.argv[1]
+    temp_dir = sys.argv[1]
 
     realisations_sql_directory = os.path.abspath("realisations_sql")
     cardcash_sql_directory = os.path.abspath("cardcash_sql")
 
-    process_database(1, realisations_sql_directory, archive_dir)
-    process_database(2, cardcash_sql_directory, archive_dir)
+    process_database(1, realisations_sql_directory, temp_dir)
+    process_database(2, cardcash_sql_directory, temp_dir)
 
 if __name__ == '__main__':
     main()
