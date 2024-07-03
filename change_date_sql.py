@@ -1,5 +1,6 @@
 import re
 import os
+import sys
 from datetime import datetime
 
 def update_sql_date(file_path, year, month):
@@ -17,9 +18,7 @@ def update_sql_date(file_path, year, month):
     updated_script = re.sub(r"date >= '\d{4}-\d{2}-\d{2}'", f"date >= '{new_start_date}'", sql_script)
     updated_script = re.sub(r"date < '\d{4}-\d{2}-\d{2}'", f"date < '{new_end_date}'", updated_script)
 
-    # Construct new file name with month name
     new_file_name = re.sub(r' (January|February|March|April|May|June|July|August|September|October|November|December)\.sql$', f' {month_name}.sql', file_path)
-
     if new_file_name == file_path:
         new_file_name = re.sub(r'\.sql$', f' {month_name}.sql', file_path)
 
@@ -46,26 +45,19 @@ def update_all_sql_files(directories, year, month):
         update_sql_date(sql_file, year, month)
 
 def main():
-    try:
-        # Get user input for year and month
-        year = int(input("Enter the year (YYYY): "))
-        month = int(input("Enter the month (MM): "))
+    if len(sys.argv) < 4:
+        print("Usage: python change_date_sql.py <year> <month> <sql_directory1> [<sql_directory2> ...]")
+        return
+    
+    year = int(sys.argv[1])
+    month = int(sys.argv[2])
+    sql_directories = sys.argv[3:]
 
-        if month < 1 or month > 12:
-            print("Invalid month. Please enter a month between 1 and 12.")
-            return
-    except ValueError:
-        print("Invalid input. Please enter numeric values for year and month.")
+    if month < 1 or month > 12:
+        print("Invalid month. Please enter a month between 1 and 12.")
         return
 
-    # Directories to search for SQL files
-    directories = [
-        'realisations_sql',
-        'cardcash_sql'
-    ]
-
-    # Update all SQL files for the given year and month
-    update_all_sql_files(directories, year, month)
+    update_all_sql_files(sql_directories, year, month)
 
 if __name__ == "__main__":
     main()
