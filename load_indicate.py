@@ -8,4 +8,4 @@ def loading_indicator(stop_event):
             break
         print('\rRunning ' + frame, end='', flush=True)
         time.sleep(0.1)
-    print('\rRunning complete!   ')
+    print('\r08. Running complete!   ')

@@ -1,4 +1,3 @@
-# path_utils.py
 import os
 from datetime import datetime
 from tkinter import Tk, filedialog, simpledialog
@@ -21,8 +20,8 @@ def create_directory_structure(base_path):
     for subdirectory in subdirectories:
         os.makedirs(os.path.join(directory_path, subdirectory), exist_ok=True)
 
-    print(f"Directory structure created at {directory_path}")
-    return directory_path, os.path.join(directory_path, "temp"), int(year), int(month)
+    print(f"01. Directory structure created at {directory_path}")
+    return directory_path, os.path.join(directory_path, "temp"), os.path.join(directory_path, "readable"), int(year), int(month)
 
 def select_directory(prompt):
     root = Tk()
@@ -30,10 +29,3 @@ def select_directory(prompt):
     selected_directory = filedialog.askdirectory(title=prompt)
     root.destroy()
     return selected_directory
-
-# def select_excel_files(prompt):
-#     root = Tk()
-#     root.withdraw()
-#     selected_files = filedialog.askopenfilenames(title=prompt, filetypes=[("Excel files", "*.xlsx *.xls *.csv")])
-#     root.destroy()
-#     return selected_files

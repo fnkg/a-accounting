@@ -4,8 +4,8 @@ import json
 
 def process_online_plus():
     # Static file path for debugging
-    file_path = './+online.csv'
-    output_path = './online_plus.xlsx'
+    file_path = './onlines/+online.csv'
+    output_path = './onlines/online_plus.xlsx'
     
     # Load the CSV file with correct delimiter
     df = pd.read_csv(file_path, delimiter=';')
@@ -34,8 +34,8 @@ def process_online_plus():
 
 def process_online_minus():
     # Static file path for debugging
-    file_path = './-online.csv'
-    output_path = './online_minus.xlsx'
+    file_path = './onlines/-online.csv'
+    output_path = './onlines/online_minus.xlsx'
     
     # Load the CSV file with correct delimiter
     df = pd.read_csv(file_path, delimiter=';')
@@ -80,8 +80,8 @@ def process_online_minus():
 
 def combine_files():
     # Load the processed files
-    plus_df = pd.read_excel('./online_plus.xlsx')
-    minus_df = pd.read_excel('./online_minus.xlsx')
+    plus_df = pd.read_excel('./onlines/online_plus.xlsx')
+    minus_df = pd.read_excel('./onlines/online_minus.xlsx')
     
     # Duplicate minus_df with positive sum
     minus_df_positive = minus_df.copy()
@@ -110,7 +110,7 @@ def create_json_from_excel():
     # Save the JSON data to a file
     json_output_path = './onlines.json'
     with open(json_output_path, 'w', encoding='utf-8') as json_file:
-        json.dump(json_data, json_file, ensure_ascii=False, indent=4)
+        json.dump(json_data, json_file, ensure_ascii=False, indent=2)
     
     print(f"JSON file saved successfully to {json_output_path}")
 

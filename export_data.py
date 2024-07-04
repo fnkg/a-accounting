@@ -52,7 +52,7 @@ def export_to_json(dataframes, output_dir):
     for name, df in dataframes.items():
         if 'realisation' in name.lower():
             data = process_realisations(df)
-        elif 'cardcash' in name.lower():
+        elif 'card+cash' in name.lower():
             data = process_cardcash(df)
         else:
             data = df.to_dict(orient='records')
