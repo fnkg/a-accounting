@@ -3,6 +3,8 @@ import threading
 import itertools
 import time
 from path_utils import create_directory_structure, select_directory, os
+import processing_onlines
+import processing_sbp
 
 def loading_indicator(stop_event):
     for frame in itertools.cycle(r'\|/-'):
@@ -61,7 +63,7 @@ def run_make_readable(temp_dir, output_dir):
     else:
         print(f"15. Error processing files: {result.stderr}")
 
-if __name__ == "__main__":
+def main():
     base_path = select_directory("Select the base path where the directory should be created")
     if base_path:
         directory_path, temp_dir, output_dir, year, month = create_directory_structure(base_path)
@@ -71,6 +73,26 @@ if __name__ == "__main__":
 
         run_change_date_sql(year, month, [realisations_dir, cardcash_dir])
         run_export_data(temp_dir)
+        
+        
+        # Process online files
+        online_files_path = select_directory("Select the directory containing the online files")
+        processing_onlines.process_online_plus(online_files_path, temp_dir)
+        processing_onlines.process_online_minus(online_files_path, temp_dir)
+        processing_onlines.combine_files(temp_dir)
+        processing_onlines.create_json_from_excel(temp_dir, 'onlines.xlsx')
+        
+        # Process SBP files
+        sbp_files_path = select_directory("Select the directory containing the SBP files")
+        processing_sbp.process_all_sbp_files(sbp_files_path, temp_dir)
+        
+        sbp_files = ['sbp bg.xlsx', 'sbp kacha.xlsx', 'sbp kch.xlsx', 'sbp mp.xlsx', 'sbp nr.xlsx']
+        for sbp_file in sbp_files:
+            processing_sbp.create_json_from_excel(temp_dir, sbp_file)
+            
         run_make_readable(temp_dir, output_dir)
     else:
         print("No base directory selected. Exiting.")
+
+if __name__ == "__main__":
+    main()
