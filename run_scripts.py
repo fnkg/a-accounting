@@ -5,7 +5,6 @@ import time
 from path_utils import create_directory_structure, select_directory, os
 import processing_onlines
 import processing_sbp
-import create_json
 
 def loading_indicator(stop_event):
     for frame in itertools.cycle(r'\|/-'):
@@ -25,7 +24,7 @@ def run_change_date_sql(year, month, sql_directories):
             print(f"02. Error processing SQL scripts in {sql_directory}: {result.stderr}")
 
 def run_export_data(temp_dir):
-    script_path = os.path.abspath("./scripts/export_data.py")
+    script_path = os.path.abspath("./export_data.py")
     python_executable = os.path.abspath(os.path.join(".venv", "Scripts", "python"))
 
     print("03. Running export_data.py")
@@ -49,7 +48,7 @@ def run_export_data(temp_dir):
         print(f"09. Error exporting data: {result.stderr}")
 
 def run_make_readable(temp_dir, output_dir):
-    script_path = os.path.abspath("./scripts/make_readable.py")
+    script_path = os.path.abspath("./make_readable.py")
     python_executable = os.path.abspath(os.path.join(".venv", "Scripts", "python"))
 
     print("10. Running make_readable.py")
@@ -81,7 +80,7 @@ def main():
         processing_onlines.process_online_plus(online_files_path, temp_dir)
         processing_onlines.process_online_minus(online_files_path, temp_dir)
         processing_onlines.combine_files(temp_dir)
-        processing_onlines.create_json(temp_dir, 'onlines.xlsx')
+        processing_onlines.create_json_from_excel(temp_dir, 'onlines.xlsx')
         
         # Process SBP files
         sbp_files_path = select_directory("Select the directory containing the SBP files")
@@ -89,7 +88,7 @@ def main():
         
         sbp_files = ['sbp bg.xlsx', 'sbp kacha.xlsx', 'sbp kch.xlsx', 'sbp mp.xlsx', 'sbp nr.xlsx']
         for sbp_file in sbp_files:
-            processing_sbp.create_json(temp_dir, sbp_file)
+            processing_sbp.create_json_from_excel(temp_dir, sbp_file)
             
         run_make_readable(temp_dir, output_dir)
     else:
