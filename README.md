@@ -32,4 +32,5 @@ json to a format for uploading to 1C
 2. python -m venv .venv
 3. source .venv/bin/activate or ./.venv/Scripts/activate
 4. pip install -r requirements.txt
-5. run the run_scripts.py
+5. get creds for .env 🙂
+6. run the run_scripts.py
