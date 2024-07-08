@@ -50,7 +50,6 @@ if __name__ == "__main__":
     temp_dir = sys.argv[1]
     output_dir = sys.argv[2]
 
-    # Store UUID mapping
     store_uuid_mapping = {
         "f966000c-3c48-11dd-96d9-000c6e46fcad": "UN",
         "823cd454-cab4-11eb-a20a-00155dc42e00": "KN",

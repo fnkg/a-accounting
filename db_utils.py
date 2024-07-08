@@ -1,4 +1,3 @@
-# db_utils.py
 import psycopg2
 from sshtunnel import SSHTunnelForwarder
 from dotenv import load_dotenv
@@ -6,7 +5,6 @@ import os
 
 load_dotenv()
 
-# Load environment variables for SSH and database connections
 ssh_host1 = os.getenv('SSH_HOST1')
 ssh_port1 = int(os.getenv('SSH_PORT1'))
 ssh_user1 = os.getenv('SSH_USER1')

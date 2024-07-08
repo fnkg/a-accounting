@@ -24,33 +24,23 @@ def get_legal_entity_info(filename):
     return store_uuid, company_uuid
 
 def process_sbp_file(file_path, output_dir):
-    # Load the CSV file with correct delimiter
     df = pd.read_csv(file_path, delimiter=';')
-    
-    # Extract the filename without path and extension
     filename = os.path.splitext(os.path.basename(file_path))[0]
-    
-    # Get legal entity info based on the filename
     store_uuid, company_uuid = get_legal_entity_info(filename)
-    
-    # Apply formulas to the columns
+
     try:
         df['id'] = df['id заказа'].astype(str) + '1'
         df['date'] = pd.to_datetime(df['Дата операции МСК'], dayfirst=True).dt.strftime('%Y%m%d')
         
-        # Ensure 'sum' column is treated as string before replacing commas
         df['sum'] = df['Сумма'].astype(str).str.replace(',', '.').astype(float)
         df['type'] = 'online'
         df['store_uuid'] = store_uuid
         df['company_uuid'] = company_uuid
         
-        # Select and reorder columns
         df = df[['id', 'date', 'sum', 'type', 'store_uuid', 'company_uuid']]
         
-        # Define the output path
         output_path = os.path.join(output_dir, f"{filename}.xlsx")
         
-        # Save the DataFrame to an Excel file
         df.to_excel(output_path, index=False)
         
         print(f"File saved successfully to {output_path}")
@@ -60,10 +50,8 @@ def process_sbp_file(file_path, output_dir):
         print(f"Error: {e}. There was an issue with the data.")
 
 def process_all_sbp_files(input_dir, output_dir):
-    # List of SBP files
     sbp_files = ['sbp bg.csv', 'sbp kacha.csv', 'sbp kch.csv', 'sbp mp.csv', 'sbp nr.csv']
-    
-    # Process each file
+
     for sbp_file in sbp_files:
         file_path = os.path.join(input_dir, sbp_file)
         process_sbp_file(file_path, output_dir)
@@ -75,7 +63,7 @@ def create_json_from_excel(output_dir, filename):
     combined_df['sum'] = combined_df['sum'].astype(float)
     
     json_data = {"payments": combined_df.to_dict(orient='records')}
-    
+
     json_output_path = os.path.join(output_dir, f"{os.path.splitext(filename)[0]}.json")
     with open(json_output_path, 'w', encoding='utf-8') as json_file:
         json.dump(json_data, json_file, ensure_ascii=False, indent=2)

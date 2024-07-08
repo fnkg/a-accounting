@@ -1,7 +1,5 @@
-
 ## Export automation
 I'm not very experienced in python, but I've been doing some manual work for accounting all last year and decided to automate the process. 
-
 
 ### description
 Each month the accounting department requested uploads for
@@ -25,7 +23,6 @@ json to a format for uploading to 1C
 - make the code more flexible and reusable
 - wrap it in an interface (web or desktop)
 - test coverage
-
 
 ## how to use
 1. git clone https://github.com/vsenichego/astra-accounting.git
