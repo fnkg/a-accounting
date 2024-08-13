@@ -3,8 +3,8 @@
 # testing
 /onec
 /excel_to_json_v2
-/cardcash_sql
-/realisations_sql
+# /cardcash_sql
+# /realisations_sql
 /sql_temp
 /sbp
 /temp
