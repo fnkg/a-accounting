@@ -7,8 +7,8 @@ case
     when t1.type = 'cash' then 'cash'
     end as type,
 case
-    when o.name = 'Клиника Кунцево Плаза' then '823cd454-cab4-11eb-a20a-00155dc42e00' end as store_uuid,
-'7dbfb2a3-6721-11ed-a221-00155d59dd05' as company_uuid
+    when o.name = 'Клиника в RigaLand' then '80bc7e6d-3b3e-11ee-a22a-00155d59dd05' end as store_uuid,
+'4557b547-348d-11ef-a230-00155d59dd05' as company_uuid
 
 from
 
@@ -29,8 +29,8 @@ where
 date >= '2024-10-01' and date < '2024-11-01' and
 t1.status = 'completed' and
 t1.operation in ('payment', 'account_replenishment') and
-o.name in ('Клиника Кунцево Плаза') and
-t1.type not in ('personal-account', 'internet-acquiring', 'raiffeisen_sbp_link', 'manual_without_receipt', 'raiffeisen_qr_plate')
+o.name in ('Клиника в RigaLand') and
+t1.type not in ('personal-account', 'internet-acquiring', 'raiffeisen_sbp_link', 'manual_without_receipt', 'raiffeisen_qr_plate', 'arca_link')
 
 
 
@@ -47,8 +47,8 @@ case
     when t1.type = 'cash' then 'cash'
     end as type,
 case
-    when o.name = 'Клиника Кунцево Плаза' then '823cd454-cab4-11eb-a20a-00155dc42e00' end as store_uuid,
-'7dbfb2a3-6721-11ed-a221-00155d59dd05' as company_uuid
+    when o.name = 'Клиника в RigaLand' then '80bc7e6d-3b3e-11ee-a22a-00155d59dd05' end as store_uuid,
+'4557b547-348d-11ef-a230-00155d59dd05' as company_uuid
 
 from
 
@@ -69,7 +69,7 @@ where
 date >= '2024-10-01' and date < '2024-11-01' and
 t1.status = 'completed' and
 t1.operation in ('refund') and
-o.name in ('Клиника Кунцево Плаза') and
-t1.type not in ('personal-account', 'internet-acquiring', 'raiffeisen_sbp_link', 'manual_without_receipt', 'raiffeisen_qr_plate')
+o.name in ('Клиника в RigaLand') and
+t1.type not in ('personal-account', 'internet-acquiring', 'raiffeisen_sbp_link', 'manual_without_receipt', 'raiffeisen_qr_plate', 'arca_link')
 
 order by date asc

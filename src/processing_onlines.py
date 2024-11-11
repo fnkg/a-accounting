@@ -12,7 +12,7 @@ def process_online_plus(input_dir, output_dir):
     
     try:
         df['id'] = df['Идентификатор платежа'].astype(str) + '1'
-        df['date'] = pd.to_datetime(df['Дата платежа']).dt.strftime('%Y%m%d')
+        df['date'] = pd.to_datetime(df['Дата платежа'], dayfirst=True).dt.strftime('%Y%m%d')
         df['sum'] = df['Сумма платежа'].str.replace(',', '.').astype(float)
         df['type'] = 'online'
         df['store_uuid'] = '720b6201-a0c4-11e1-9f3c-001e37ed2a0b'
@@ -37,7 +37,7 @@ def process_online_minus(input_dir, output_dir):
     
     try:
         df['id'] = df['Идентификатор платежа'].astype(str) + '1'
-        df['date'] = pd.to_datetime(df['Дата возврата (если возвратов несколько — последнего)']).dt.strftime('%Y%m%d')
+        df['date'] = pd.to_datetime(df['Дата возврата (если возвратов несколько — последнего)'], dayfirst=True).dt.strftime('%Y%m%d')
         
         df['Сумма возврата по платежу'] = df['Сумма возврата по платежу'].str.replace('RUB', '').str.strip()
         df['Сумма возврата по платежу'] = df['Сумма возврата по платежу'].str.replace(',', '.')
@@ -47,7 +47,7 @@ def process_online_minus(input_dir, output_dir):
         df['store_uuid'] = '720b6201-a0c4-11e1-9f3c-001e37ed2a0b'
         df['company_uuid'] = '4d0460ff-a0cb-11e2-9494-91acf06830ea'
         
-        df['month'] = pd.to_datetime(df['Дата возврата (если возвратов несколько — последнего)']).dt.strftime('%m')
+        df['month'] = pd.to_datetime(df['Дата возврата (если возвратов несколько — последнего)'], dayfirst=True).dt.strftime('%m')
         
         df = df[['id', 'date', 'sum', 'type', 'store_uuid', 'company_uuid', 'month']]
         

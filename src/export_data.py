@@ -5,6 +5,8 @@ import pandas as pd
 from decimal import Decimal
 from db_utils import create_db_connection, close_db_connection, get_connection_details
 
+BASE_DIR = os.path.abspath(os.path.join(os.path.dirname(__file__), '..'))
+
 def execute_sql_scripts(sql_scripts, connection):
     results = {}
     for script in sql_scripts:
@@ -97,8 +99,8 @@ def main():
     
     temp_dir = sys.argv[1]
 
-    realisations_sql_directory = os.path.abspath("realisations_sql")
-    cardcash_sql_directory = os.path.abspath("cardcash_sql")
+    realisations_sql_directory = os.path.join(BASE_DIR, "src", "realisations_sql")
+    cardcash_sql_directory = os.path.join(BASE_DIR, "src", "cardcash_sql")
 
     process_database(1, realisations_sql_directory, temp_dir)
     process_database(2, cardcash_sql_directory, temp_dir)

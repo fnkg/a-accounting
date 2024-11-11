@@ -3,6 +3,8 @@ import os
 import sys
 from datetime import datetime
 
+BASE_DIR = os.path.abspath(os.path.join(os.path.dirname(__file__), '..'))
+
 def update_sql_date(file_path, year, month):
     with open(file_path, 'r') as file:
         sql_script = file.read()
@@ -33,7 +35,8 @@ def update_sql_date(file_path, year, month):
 def find_sql_files(directories):
     sql_files = []
     for directory in directories:
-        for root, _, files in os.walk(directory):
+        abs_directory = os.path.join(BASE_DIR, directory) if not os.path.isabs(directory) else directory
+        for root, _, files in os.walk(abs_directory):
             for file in files:
                 if file.endswith('.sql'):
                     sql_files.append(os.path.join(root, file))

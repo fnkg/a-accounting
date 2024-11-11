@@ -7,8 +7,10 @@ case
     when t1.type = 'cash' then 'cash'
     end as type,
 case
-    when o.name = 'Клиника в RigaLand' then '80bc7e6d-3b3e-11ee-a22a-00155d59dd05' end as store_uuid,
-'4557b547-348d-11ef-a230-00155d59dd05' as company_uuid
+    when o.name = 'Клиника в Москва-Сити' then 'e884414e-345f-11e2-9222-f23cea8074d9'
+    when o.name = 'Клиника в Белых садах' then '608fadf8-9055-11e2-ba2e-f1630d599bdb'
+    else '720b6201-a0c4-11e1-9f3c-001e37ed2a0b' end as store_uuid,
+    '4d0460ff-a0cb-11e2-9494-91acf06830ea' as company_uuid
 
 from
 
@@ -29,13 +31,11 @@ where
 date >= '2024-10-01' and date < '2024-11-01' and
 t1.status = 'completed' and
 t1.operation in ('payment', 'account_replenishment') and
-o.name in ('Клиника в RigaLand') and
-t1.type not in ('personal-account', 'internet-acquiring', 'raiffeisen_sbp_link', 'manual_without_receipt', 'raiffeisen_qr_plate')
-
+o.name in ('Клиника в Белых садах', 'Клиника в Москва-Сити') and
+t1.type not in ('personal-account', 'internet-acquiring', 'raiffeisen_sbp_link', 'manual_without_receipt', 'raiffeisen_qr_plate', 'arca_link')
 
 
 union
-
 
 
 select id,
@@ -47,8 +47,10 @@ case
     when t1.type = 'cash' then 'cash'
     end as type,
 case
-    when o.name = 'Клиника в RigaLand' then '80bc7e6d-3b3e-11ee-a22a-00155d59dd05' end as store_uuid,
-'4557b547-348d-11ef-a230-00155d59dd05' as company_uuid
+    when o.name = 'Клиника в Москва-Сити' then 'e884414e-345f-11e2-9222-f23cea8074d9'
+    when o.name = 'Клиника в Белых садах' then '608fadf8-9055-11e2-ba2e-f1630d599bdb'
+    else '720b6201-a0c4-11e1-9f3c-001e37ed2a0b' end as store_uuid,
+    '4d0460ff-a0cb-11e2-9494-91acf06830ea' as company_uuid
 
 from
 
@@ -69,7 +71,7 @@ where
 date >= '2024-10-01' and date < '2024-11-01' and
 t1.status = 'completed' and
 t1.operation in ('refund') and
-o.name in ('Клиника в RigaLand') and
-t1.type not in ('personal-account', 'internet-acquiring', 'raiffeisen_sbp_link', 'manual_without_receipt', 'raiffeisen_qr_plate')
+o.name in ('Клиника в Белых садах', 'Клиника в Москва-Сити') and
+t1.type not in ('personal-account', 'internet-acquiring', 'raiffeisen_sbp_link', 'manual_without_receipt', 'raiffeisen_qr_plate', 'arca_link')
 
 order by date asc

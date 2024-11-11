@@ -30,7 +30,7 @@ date >= '2024-10-01' and date < '2024-11-01' and
 t1.status = 'completed' and
 t1.operation in ('payment', 'account_replenishment') and
 o.name in ('Клиника на Университете') and
-t1.type not in ('personal-account', 'internet-acquiring', 'raiffeisen_sbp_link', 'manual_without_receipt', 'raiffeisen_qr_plate')
+t1.type not in ('personal-account', 'internet-acquiring', 'raiffeisen_sbp_link', 'manual_without_receipt', 'raiffeisen_qr_plate', 'arca_link')
 
 
 
@@ -70,6 +70,6 @@ date >= '2024-10-01' and date < '2024-11-01' and
 t1.status = 'completed' and
 t1.operation in ('refund') and
 o.name in ('Клиника на Университете') and
-t1.type not in ('personal-account', 'internet-acquiring', 'raiffeisen_sbp_link', 'manual_without_receipt', 'raiffeisen_qr_plate')
+t1.type not in ('personal-account', 'internet-acquiring', 'raiffeisen_sbp_link', 'manual_without_receipt', 'raiffeisen_qr_plate', 'arca_link')
 
 order by date asc

@@ -6,6 +6,9 @@ from path_utils import create_directory_structure, select_directory, os
 import processing_onlines
 import processing_sbp
 
+# Define the base directory as the parent of the `src` directory
+BASE_DIR = os.path.abspath(os.path.join(os.path.dirname(__file__), '..'))
+
 def loading_indicator(stop_event):
     for frame in itertools.cycle(r'\|/-'):
         if stop_event.is_set():
@@ -15,7 +18,7 @@ def loading_indicator(stop_event):
     print('\r08. Running complete!   ')
 
 def run_change_date_sql(year, month, sql_directories):
-    script_path = "./change_date_sql.py"
+    script_path = os.path.join(BASE_DIR, "src", "change_date_sql.py")
     for sql_directory in sql_directories:
         result = subprocess.run(["python", script_path, str(year), str(month), sql_directory], capture_output=True, text=True)
         if result.returncode == 0:
@@ -24,8 +27,8 @@ def run_change_date_sql(year, month, sql_directories):
             print(f"02. Error processing SQL scripts in {sql_directory}: {result.stderr}")
 
 def run_export_data(temp_dir):
-    script_path = os.path.abspath("./export_data.py")
-    python_executable = os.path.abspath(os.path.join(".venv", "Scripts", "python"))
+    script_path = os.path.join(BASE_DIR, "src", "export_data.py")
+    python_executable = os.path.join(BASE_DIR, ".venv", "Scripts", "python")
 
     print("03. Running export_data.py")
     print(f"04. Using Python executable: {python_executable}")
@@ -48,8 +51,8 @@ def run_export_data(temp_dir):
         print(f"09. Error exporting data: {result.stderr}")
 
 def run_make_readable(temp_dir, output_dir):
-    script_path = os.path.abspath("./make_readable.py")
-    python_executable = os.path.abspath(os.path.join(".venv", "Scripts", "python"))
+    script_path = os.path.join(BASE_DIR, "src", "make_readable.py")
+    python_executable = os.path.join(BASE_DIR, ".venv", "Scripts", "python")
 
     print("10. Running make_readable.py")
     print(f"11. Script path: {script_path}")
@@ -68,8 +71,9 @@ def main():
     if base_path:
         directory_path, temp_dir, output_dir, year, month = create_directory_structure(base_path)
 
-        realisations_dir = os.path.abspath("realisations_sql")
-        cardcash_dir = os.path.abspath("cardcash_sql")
+        # Update the paths for realisations and cardcash directories
+        realisations_dir = os.path.join(BASE_DIR, "src", "realisations_sql")
+        cardcash_dir = os.path.join(BASE_DIR, "src", "cardcash_sql")
 
         run_change_date_sql(year, month, [realisations_dir, cardcash_dir])
         run_export_data(temp_dir)
