@@ -1,38 +1,10 @@
-# dependencies
+/__pycache__
+/.vscode
+/.temp
 
-# testing
-/onec
-/excel_to_json_v2
-# /cardcash_sql
-# /realisations_sql
-/sql_temp
 /sbp
-/temp
-
-# misc
-.DS_Store
-*.pem
-
-# debug
+/onlines
 
 # local env files
 .venv
 .env
-
-# some assets
-/vba/all-payments VBA.csv
-/vba/VBA ONLINE.txt
-
-# outputs
-/output_json
-/output_xlsx
-/input_processing
-/onlines
-/sbp_output
-
-# drafts
-/run_datagrip.sh
-/execute_datagrip.py
-
-/.gitconfig
-/__pycache__
