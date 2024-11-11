@@ -5,6 +5,6 @@
 /sbp
 /onlines
 
-# local env files
+# env files
 .venv
 .env
