@@ -26,7 +26,7 @@ join organization o on o.organization_id = t1.org_id
 join users u on u.user_id = t1.user_id
 
 where
-date >= '2024-10-01' and date < '2024-11-01' and
+date >= '2025-01-01' and date < '2025-02-01' and
 t1.status = 'completed' and
 t1.operation in ('payment', 'account_replenishment') and
 o.name in ('Клиника в RigaLand') and
@@ -66,7 +66,7 @@ join organization o on o.organization_id = t1.org_id
 join users u on u.user_id = t1.user_id
 
 where
-date >= '2024-10-01' and date < '2024-11-01' and
+date >= '2025-01-01' and date < '2025-02-01' and
 t1.status = 'completed' and
 t1.operation in ('refund') and
 o.name in ('Клиника в RigaLand') and

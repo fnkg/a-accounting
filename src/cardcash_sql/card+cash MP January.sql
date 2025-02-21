@@ -7,8 +7,8 @@ case
     when t1.type = 'cash' then 'cash'
     end as type,
 case
-    when o.name = 'Клиника на Университете' then 'f966000c-3c48-11dd-96d9-000c6e46fcad' end as store_uuid,
-'c84cdf1b-6720-11ed-a221-00155d59dd05' as company_uuid
+    when o.name = 'Клиника в Метрополисе' then '53cff195-3b3d-11ee-a22a-00155d59dd05' end as store_uuid,
+'805250f1-2309-11ef-a230-00155d59dd05' as company_uuid
 
 from
 
@@ -26,10 +26,10 @@ join organization o on o.organization_id = t1.org_id
 join users u on u.user_id = t1.user_id
 
 where
-date >= '2024-10-01' and date < '2024-11-01' and
+date >= '2025-01-01' and date < '2025-02-01' and
 t1.status = 'completed' and
 t1.operation in ('payment', 'account_replenishment') and
-o.name in ('Клиника на Университете') and
+o.name in ('Клиника в Метрополисе') and
 t1.type not in ('personal-account', 'internet-acquiring', 'raiffeisen_sbp_link', 'manual_without_receipt', 'raiffeisen_qr_plate', 'arca_link')
 
 
@@ -47,8 +47,8 @@ case
     when t1.type = 'cash' then 'cash'
     end as type,
 case
-    when o.name = 'Клиника на Университете' then 'f966000c-3c48-11dd-96d9-000c6e46fcad' end as store_uuid,
-'c84cdf1b-6720-11ed-a221-00155d59dd05' as company_uuid
+    when o.name = 'Клиника в Метрополисе' then '53cff195-3b3d-11ee-a22a-00155d59dd05' end as store_uuid,
+'805250f1-2309-11ef-a230-00155d59dd05' as company_uuid
 
 from
 
@@ -66,10 +66,10 @@ join organization o on o.organization_id = t1.org_id
 join users u on u.user_id = t1.user_id
 
 where
-date >= '2024-10-01' and date < '2024-11-01' and
+date >= '2025-01-01' and date < '2025-02-01' and
 t1.status = 'completed' and
 t1.operation in ('refund') and
-o.name in ('Клиника на Университете') and
+o.name in ('Клиника в Метрополисе') and
 t1.type not in ('personal-account', 'internet-acquiring', 'raiffeisen_sbp_link', 'manual_without_receipt', 'raiffeisen_qr_plate', 'arca_link')
 
 order by date asc
