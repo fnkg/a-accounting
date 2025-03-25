@@ -6,18 +6,19 @@ Each month the accounting department requested uploads for
 1. payment cards
 2. cash
 3. realisations
-There are also uploads for online payments and payments via SBP.
+4. There are also uploads for online payments and payments via SBP.
 
 items 1-3 are uploaded from postgresql database.
-online and sbp are unloaded from personal accounts
+"onlines" and "sbp" are unloaded from personal accounts
 
 the script does the following:
 1. requests the year and month for uploads and creates working directories
-3. changes dates in sql files 
+3. changes dates in sql files
 4. executes them and exports the data in json and xlsx formats
-5. asks for paths for online and sbp
-6. processes all files: xlsx to a readable form for accounting,
-json to a format for uploading to 1C
+5. asks for paths for "onlines" and "sbp"
+6. processes all files:
+ - xlsx to a readable form for accounting department,
+ - json to a format for uploading to 1C
 
 ### plans
 - make the code more flexible and reusable
@@ -30,4 +31,4 @@ json to a format for uploading to 1C
 3. source .venv/bin/activate or ./.venv/Scripts/activate
 4. pip install -r requirements.txt
 5. get creds for .env 🙂
-6. run the run_scripts.py
+6. run the main.py
