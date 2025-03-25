@@ -7,10 +7,11 @@ select id,
          when t1.type = 'cash'                then 'cash'
        end                                    as type,
        case
-         when o.name = 'Клиника в Метрополисе' then '53cff195-3b3d-11ee-a22a-00155d59dd05'
+         when o.name = 'Клиника в Москва-Сити' then 'e884414e-345f-11e2-9222-f23cea8074d9'
+         else '720b6201-a0c4-11e1-9f3c-001e37ed2a0b'
        end                                    as store_uuid,
-       '805250f1-2309-11ef-a230-00155d59dd05' as company_uuid
-  
+       '4d0460ff-a0cb-11e2-9494-91acf06830ea' as company_uuid
+
   from (select fp.payment_id              as id,
                fp.method::json ->> 'type' as type,
                fp.amount                  as amount,
@@ -20,20 +21,20 @@ select id,
                fp.status                  as status,
                fp.operation               as operation
           from finance.payment            fp
-               
+
                join rendered_service_view rsv on rsv.rendered_service_id = any (fp.rendered_service_ids)
                join service               s on rsv.value::json ->> 'serviceId' = text(s.service_id)
           where s.category != '1CProduct'
        ) as              t1
-       
+
        join organization o on o.organization_id = t1.org_id
        join users        u on u.user_id = t1.user_id
-  
+
   where date >= '2025-02-01' and
         date < '2025-03-01' and
         t1.status = 'completed' and
         t1.operation in ('payment', 'account_replenishment') and
-        o.name in ('Клиника в Метрополисе') and
+        o.name in ('Клиника в Москва-Сити') and
         t1.type not in ('personal-account', 'internet-acquiring', 'raiffeisen_sbp_link', 'manual_without_receipt',
                         'raiffeisen_qr_plate', 'arca_link')
 
@@ -50,10 +51,11 @@ select id,
          when t1.type = 'cash'                then 'cash'
        end                                    as type,
        case
-         when o.name = 'Клиника в Метрополисе' then '53cff195-3b3d-11ee-a22a-00155d59dd05'
+         when o.name = 'Клиника в Москва-Сити' then 'e884414e-345f-11e2-9222-f23cea8074d9'
+         else '720b6201-a0c4-11e1-9f3c-001e37ed2a0b'
        end                                    as store_uuid,
-       '805250f1-2309-11ef-a230-00155d59dd05' as company_uuid
-  
+       '4d0460ff-a0cb-11e2-9494-91acf06830ea' as company_uuid
+
   from (select fp.payment_id              as id,
                fp.method::json ->> 'type' as type,
                fp.amount                  as amount,
@@ -63,20 +65,20 @@ select id,
                fp.status                  as status,
                fp.operation               as operation
           from finance.payment            fp
-               
+
                join rendered_service_view rsv on rsv.rendered_service_id = any (fp.rendered_service_ids)
                join service               s on rsv.value::json ->> 'serviceId' = text(s.service_id)
           where s.category != '1CProduct'
        ) as              t1
-       
+
        join organization o on o.organization_id = t1.org_id
        join users        u on u.user_id = t1.user_id
-  
+
   where date >= '2025-02-01' and
         date < '2025-03-01' and
         t1.status = 'completed' and
         t1.operation in ('refund') and
-        o.name in ('Клиника в Метрополисе') and
+        o.name in ('Клиника в Москва-Сити') and
         t1.type not in ('personal-account', 'internet-acquiring', 'raiffeisen_sbp_link', 'manual_without_receipt',
                         'raiffeisen_qr_plate', 'arca_link')
 

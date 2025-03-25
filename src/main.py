@@ -87,7 +87,7 @@ def main():
         sbp_files_path = select_directory("Select the directory containing the SBP files")
         processing_sbp.process_all_sbp_files(sbp_files_path, temp_dir)
         
-        sbp_files = ['sbp bg.xlsx', 'sbp kacha.xlsx', 'sbp kch.xlsx', 'sbp mp.xlsx', 'sbp nr.xlsx']
+        sbp_files = ['sbp un.xlsx', 'sbp kn.xlsx', 'sbp bs.xlsx', 'sbp mc.xlsx', 'sbp mp.xlsx', 'sbp nr.xlsx']
         for sbp_file in sbp_files:
             processing_sbp.create_json_from_excel(temp_dir, sbp_file)
             

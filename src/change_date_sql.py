@@ -20,9 +20,18 @@ def update_sql_date(file_path, year, month):
     updated_script = re.sub(r"date >= '\d{4}-\d{2}-\d{2}'", f"date >= '{new_start_date}'", sql_script)
     updated_script = re.sub(r"date < '\d{4}-\d{2}-\d{2}'", f"date < '{new_end_date}'", updated_script)
 
-    new_file_name = re.sub(r' (January|February|March|April|May|June|July|August|September|October|November|December)\.sql$', f' {month_name}.sql', file_path)
-    if new_file_name == file_path:
-        new_file_name = re.sub(r'\.sql$', f' {month_name}.sql', file_path)
+    month_regex = r'(January|February|March|April|May|June|July|August|September|October|November|December)'
+    pattern = re.compile(rf' {month_regex}\.sql$')
+    # Проверка: если имя уже заканчивается на нужный месяц — не меняем
+    if re.search(rf' {month_name}\.sql$', file_path):
+        new_file_name = file_path
+    else:
+        # Если в имени есть другой месяц — заменим его
+        if pattern.search(file_path):
+            new_file_name = pattern.sub(f' {month_name}.sql', file_path)
+        else:
+            # Если нет месяца — добавим
+            new_file_name = re.sub(r'\.sql$', f' {month_name}.sql', file_path)
 
     with open(new_file_name, 'w') as file:
         file.write(updated_script)

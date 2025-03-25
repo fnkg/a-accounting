@@ -54,7 +54,7 @@ if __name__ == "__main__":
         "f966000c-3c48-11dd-96d9-000c6e46fcad": "UN",
         "823cd454-cab4-11eb-a20a-00155dc42e00": "KN",
         "e884414e-345f-11e2-9222-f23cea8074d9": "MC",
-        "608fadf8-9055-11e2-ba2e-f1630d599bdb": "BS",
+        "28cd7fa6-1c65-11ef-a230-00155d59dd05": "BS",
         "53cff195-3b3d-11ee-a22a-00155d59dd05": "MP",
         "80bc7e6d-3b3e-11ee-a22a-00155d59dd05": "RG",
         "720b6201-a0c4-11e1-9f3c-001e37ed2a0b": "online",

@@ -17,19 +17,6 @@ select to_char(date, 'YYYYMMDD')             as date,
   from insurers_revenue
   where date >= '2025-02-01' and
         date < '2025-03-01' and
-        organization_abbreviation = 'UN' and
-        service_category != '1CProduct'
+        organization_abbreviation = 'UN'
   group by date, store_uuid, company_uuid
   order by date
-
-select * from insurers_revenue where service_category = '1CProduct';
-
-select * from plan_snapshot limit 100
-
-select *
-from rendered_service_view rsv
-join service          s on rsv.value::json ->> 'serviceId' = text(s.service_id)
-where s.category = 'materialsAndPreparations'
-limit 1000
-
-select * from service where category = '1CProduct' and status = 'active'
