@@ -7,16 +7,16 @@ select to_char(date, 'YYYYMMDD')             as date,
        sum(patient_pay)                      as sum,
 
        (case
-
-          when organization_abbreviation = 'RG' then '80bc7e6d-3b3e-11ee-a22a-00155d59dd05'
+          when organization_abbreviation in ('MC', 'УЦ', 'DOC') then 'e884414e-345f-11e2-9222-f23cea8074d9'
         end)                                 as store_uuid,
        (case
-          when organization_abbreviation = 'RG' then '4557b547-348d-11ef-a230-00155d59dd05'
+          when organization_abbreviation in ('MC', 'DOC', 'УЦ')
+            then '4d0460ff-a0cb-11e2-9494-91acf06830ea'
         end)
                                              as company_uuid
   from insurers_revenue
-  where date >= '2025-02-01' and
-        date < '2025-03-01' and
-        organization_abbreviation = 'RG'
+  where date >= '2025-03-01' and
+        date < '2025-04-01' and
+        organization_abbreviation in ('MC', 'DOC', 'УЦ')
   group by date, store_uuid, company_uuid
   order by date

@@ -2,9 +2,6 @@
 /.vscode
 /.temp
 
-/sbp
-/onlines
-
 # env files
 .venv
 .env

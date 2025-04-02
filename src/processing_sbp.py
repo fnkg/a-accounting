@@ -10,8 +10,8 @@ def get_legal_entity_info(filename):
         store_uuid = '720b6201-a0c4-11e1-9f3c-001e37ed2a0b'
         company_uuid = '7dbfb2a3-6721-11ed-a221-00155d59dd05'
     elif 'bs' in filename:
-        store_uuid = '0b9f6f47-d30c-11ef-a23b-00155d59dd05'
-        company_uuid = 'fe5547ce-3d84-11df-96f8-000c6ea69372'
+        store_uuid = '28cd7fa6-1c65-11ef-a230-00155d59dd05'
+        company_uuid = '0b9f6f47-d30c-11ef-a23b-00155d59dd05'
     elif 'mc' in filename:
         store_uuid = '97b66876-45fc-11e3-a6a8-c2b5fc6ba0c4'
         company_uuid = '4d0460ff-a0cb-11e2-9494-91acf06830ea'
